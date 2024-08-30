@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Finance App for managing your finances made by Gabriel Samoylov"
 };
 
+export const runtime = "edge";
+
 export default function RootLayout({
   children
 }: Readonly<{
