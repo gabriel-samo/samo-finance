@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
-    <main>
-      <p>This is an authenticated route</p>
-    </main>
+    <div>
+      <h1>Dashboard Page</h1>
+    </div>
   );
 }
