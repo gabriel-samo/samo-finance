@@ -1,7 +1,0 @@
-name = "samo-finance"
-compatibility_date = "2024-08-31"
-compatibility_flags = ["nodejs_compat"]
-
-[env.production]
-compatibility_date = "2024-08-31"
-compatibility_flags = ["nodejs_compat"]
