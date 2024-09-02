@@ -53,13 +53,9 @@ const Navigation = () => {
             <Menu className="size-4" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="px-2">
-          <Image
-            src="/blurry-bg.svg"
-            alt="blurry-bg"
-            fill
-            className="absolute inset-0 w-full h-full object-cover z-[-1]"
-          />
+        <SheetContent side="left" className="px-2 overflow-clip">
+          <div className="absolute top-0 -left-4 size-44 md:size-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-first"></div>
+          <div className="absolute top-16 -right-4 size-44 md:size-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-forth animation-delay-2000"></div>
           <nav className="flex flex-col gap-y-2 pt-6">
             {routes.map((route) => (
               <Button
@@ -68,7 +64,7 @@ const Navigation = () => {
                 onClick={() => onClick(route.href)}
                 className={cn(
                   "w-full justify-start",
-                  pathname === route.href && "bg-white/20 text-white/75"
+                  pathname === route.href && "bg-black/20 text-black"
                 )}
               >
                 {route.label}
