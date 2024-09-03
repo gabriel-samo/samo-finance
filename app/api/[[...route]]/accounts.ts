@@ -6,6 +6,8 @@ import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { db } from "@/db/drizzle";
 import { accounts } from "@/db/schema";
 
+export const runtime = "edge";
+
 const app = new Hono().get("/", clerkMiddleware(), async (c) => {
   const auth = getAuth(c);
 
