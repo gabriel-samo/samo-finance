@@ -29,9 +29,17 @@ const app = new Hono().get("/", clerkMiddleware(), async (c) => {
       .from(accounts)
       .where(eq(accounts.userId, auth.userId));
     return c.json({ data });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching accounts:", error);
-    return c.json({ error }, 500);
+    return c.json(
+      {
+        message: error.message,
+        stack: error.stack,
+        cause: error.cause,
+        name: error.name
+      },
+      500
+    );
   }
 });
 

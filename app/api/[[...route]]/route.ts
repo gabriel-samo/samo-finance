@@ -20,13 +20,29 @@ const routes = app.route("/accounts", accountsRouter);
 export const GET = handle(
   app.onError((err, c) => {
     console.error(err);
-    return c.json({ error: err }, 500);
+    return c.json(
+      {
+        message: err.message,
+        stack: err.stack,
+        cause: err.cause,
+        name: err.name
+      },
+      500
+    );
   })
 );
 export const POST = handle(
   app.onError((err, c) => {
     console.error(err);
-    return c.json({ error: err }, 500);
+    return c.json(
+      {
+        message: err.message,
+        stack: err.stack,
+        cause: err.cause,
+        name: err.name
+      },
+      500
+    );
   })
 );
 
