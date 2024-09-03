@@ -17,7 +17,17 @@ const app = new Hono().basePath("/api");
 
 const routes = app.route("/accounts", accountsRouter);
 
-export const GET = handle(app);
-export const POST = handle(app);
+export const GET = handle(
+  app.onError((err, c) => {
+    console.error(err);
+    return c.json({ error: err }, 500);
+  })
+);
+export const POST = handle(
+  app.onError((err, c) => {
+    console.error(err);
+    return c.json({ error: err }, 500);
+  })
+);
 
 export type AppType = typeof routes;
