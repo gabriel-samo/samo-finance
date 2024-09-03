@@ -8,39 +8,46 @@ import { accounts } from "@/db/schema";
 
 export const runtime = "edge";
 
-const app = new Hono().get("/", clerkMiddleware(), async (c) => {
-  try {
-    const auth = getAuth(c);
+const app = new Hono().get(
+  "/",
+  clerkMiddleware({
+    secretKey: process.env.CLERK_SECRET_KEY,
+    publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+  }),
+  async (c) => {
+    try {
+      const auth = getAuth(c);
 
-    if (!auth?.userId) {
-      // NEW version of Hono
-      return c.json({ error: "Unauthorized" }, 401);
-      // OLD version of Hono
-      // throw new HTTPException(401, {
-      //   res: c.json({ error: "Unauthorized" }, 401)
-      // });
+      if (!auth?.userId) {
+        // NEW version of Hono
+        return c.json({ error: "Unauthorized" }, 401);
+        // OLD version of Hono
+        // throw new HTTPException(401, {
+        //   res: c.json({ error: "Unauthorized" }, 401)
+        // });
+      }
+
+      const data = await db
+        .select({
+          id: accounts.id,
+          name: accounts.name
+        })
+        .from(accounts)
+        .where(eq(accounts.userId, auth.userId));
+      return c.json({ data });
+    } catch (error: any) {
+      console.error("Error fetching accounts:", error);
+      return c.json(
+        {
+          message: error.message,
+          stack: error.stack,
+          cause: error.cause,
+          name: error.name
+        },
+        500
+      );
     }
-
-    const data = await db
-      .select({
-        id: accounts.id,
-        name: accounts.name
-      })
-      .from(accounts)
-      .where(eq(accounts.userId, auth.userId));
-    return c.json({ data });
-  } catch (error: any) {
-    console.error("Error fetching accounts:", error);
-    return c.json(
-      {
-        message: error.message,
-        stack: error.stack,
-        cause: error.cause,
-        name: error.name
-      },
-      500
-    );
   }
-});
+);
 
 export default app;
