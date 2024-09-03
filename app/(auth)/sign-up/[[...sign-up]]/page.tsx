@@ -5,7 +5,7 @@ import { SignUp, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 export default function SignUpPage() {
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-      <div className="h-full bg-blue-600 hidden lg:flex items-center justify-center">
+      <div className="h-full bg-emerald-600 hidden lg:flex items-center justify-center">
         <Image src="/logo.svg" alt="Logo" width={100} height={100} />
       </div>
       <div className="h-full lg:flex flex-col items-center justify-center px-4">

@@ -21,7 +21,7 @@ export default function SignInPage() {
           </ClerkLoading>
         </div>
       </div>
-      <div className="h-full bg-blue-600 hidden lg:flex items-center justify-center">
+      <div className="h-full bg-emerald-600 hidden lg:flex items-center justify-center">
         <Image src="/logo.svg" alt="ogo" width={100} height={100} />
       </div>
     </div>
