@@ -17,27 +17,28 @@ const app = new Hono().basePath("/api");
 // });
 
 app.use(
-  "/api/*",
-  cors({
-    origin: [
-      "https://finance.gabrielsamo.com/*",
-      "https://samo-finance.pages.dev/*",
-      "http://localhost:3000/*"
-    ],
-    allowMethods: ["GET", "POST", "PUT", "DELETE"],
-    allowHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Access-Control-Allow-Origin"
-    ],
-    exposeHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Access-Control-Allow-Origin"
-    ],
-    maxAge: 86400,
-    credentials: true
-  })
+  "*",
+  cors()
+  //   {
+  //   origin: [
+  //     "https://finance.gabrielsamo.com/",
+  //     "https://samo-finance.pages.dev/",
+  //     "http://localhost:3000/"
+  //   ],
+  //   allowMethods: ["GET", "POST", "PUT", "DELETE"],
+  //   allowHeaders: [
+  //     "Content-Type",
+  //     "Authorization",
+  //     "Access-Control-Allow-Origin"
+  //   ],
+  //   exposeHeaders: [
+  //     "Content-Type",
+  //     "Authorization",
+  //     "Access-Control-Allow-Origin"
+  //   ],
+  //   maxAge: 86400,
+  //   credentials: true
+  // })
 );
 const routes = app.route("/accounts", accountsRouter);
 
