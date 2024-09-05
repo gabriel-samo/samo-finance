@@ -20,7 +20,18 @@ app.use(
   "/api/*",
   cors({
     origin: ["https://finance.gabrielsamo.com", "http://localhost:3000"],
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin"
+    ],
+    exposeHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin"
+    ],
+    maxAge: 86400
   })
 );
 const routes = app.route("/accounts", accountsRouter);
