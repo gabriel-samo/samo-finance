@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { handle } from "hono/vercel";
 import accountsRouter from "./accounts";
 // import { HTTPException } from "hono/http-exception";
@@ -46,14 +45,5 @@ export const POST = handle(
     );
   })
 );
-
-app.use("*", async (c, next) => {
-  const corsMiddleware = cors({
-    origin: ["https://finance.gabrielsamo.com"],
-    allowHeaders: ["Origin", "Content-Type", "Authorization"],
-    allowMethods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"]
-  });
-  await corsMiddleware(c, next);
-});
 
 export type AppType = typeof routes;

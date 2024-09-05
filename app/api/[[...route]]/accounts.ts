@@ -11,14 +11,6 @@ import { accounts, insertAccountsSchema } from "@/db/schema";
 import { clerkOptions } from "@/utils/clerkOpions";
 
 const app = new Hono()
-  .use("/api/*", async (c, next) => {
-    const corsMiddleware = cors({
-      origin: ["https://finance.gabrielsamo.com"],
-      allowHeaders: ["Origin", "Content-Type", "Authorization"],
-      allowMethods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"]
-    });
-    await corsMiddleware(c, next);
-  })
   // method
   .get(
     // path
