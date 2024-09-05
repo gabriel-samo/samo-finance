@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { handle } from "hono/vercel";
 import accountsRouter from "./accounts";
 // import { HTTPException } from "hono/http-exception";
@@ -15,6 +16,13 @@ const app = new Hono().basePath("/api");
 //   return c.json({ error: "Internal Error" }, 500);
 // });
 
+app.use(
+  "/api/*",
+  cors({
+    origin: ["https://finance.gabrielsamo.com", "http://localhost:3000"],
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  })
+);
 const routes = app.route("/accounts", accountsRouter);
 
 export const GET = handle(
