@@ -18,14 +18,9 @@ const app = new Hono().basePath("/api");
 
 app.use("*", async (c, next) => {
   const corsMiddleware = cors({
-    origin: [
-      "https://finance.gabrielsamo.com/",
-      "https://samo-finance.pages.dev/",
-      "http://localhost:3000/"
-    ],
+    origin: ["https://finance.gabrielsamo.com"],
     allowHeaders: ["Origin", "Content-Type", "Authorization"],
-    allowMethods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
-    credentials: true
+    allowMethods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"]
   });
   await corsMiddleware(c, next);
 });
