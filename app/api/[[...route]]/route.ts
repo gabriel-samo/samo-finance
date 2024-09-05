@@ -16,19 +16,20 @@ const app = new Hono().basePath("/api");
 //   return c.json({ error: "Internal Error" }, 500);
 // });
 
-app.use(
-  "*",
-  cors({
-    origin: ["https://finance.gabrielsamo.com/"],
-    allowMethods: ["GET", "POST"],
-    allowHeaders: ["Access-Control-Allow-Origin"],
-    exposeHeaders: ["Access-Control-Allow-Origin"]
-  })
-);
-
-app.post("*", async (c, next) => {
-  return next();
+app.use("*", async (c, next) => {
+  const corsMiddleware = cors({
+    origin: [
+      "https://finance.gabrielsamo.com/",
+      "https://samo-finance.pages.dev/",
+      "http://localhost:3000/"
+    ],
+    allowHeaders: ["Origin", "Content-Type", "Authorization"],
+    allowMethods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+    credentials: true
+  });
+  await corsMiddleware(c, next);
 });
+
 const routes = app.route("/accounts", accountsRouter);
 
 export const GET = handle(
