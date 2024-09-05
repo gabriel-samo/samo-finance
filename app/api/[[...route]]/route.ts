@@ -19,8 +19,12 @@ const app = new Hono().basePath("/api");
 app.use(
   "/api/*",
   cors({
-    origin: ["https://finance.gabrielsamo.com", "http://localhost:3000"],
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: [
+      "https://finance.gabrielsamo.com/*",
+      "https://samo-finance.pages.dev/*",
+      "http://localhost:3000/*"
+    ],
+    allowMethods: ["GET", "POST", "PUT", "DELETE"],
     allowHeaders: [
       "Content-Type",
       "Authorization",
