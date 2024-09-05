@@ -54,8 +54,14 @@ const Navigation = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="px-2 overflow-clip">
-          <div className="absolute top-0 -left-4 size-44 md:size-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-first"></div>
-          <div className="absolute top-16 -right-4 size-44 md:size-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-forth animation-delay-2000"></div>
+          <div
+            style={{ zIndex: -1 }}
+            className="absolute top-0 -left-4 size-44 md:size-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-first"
+          ></div>
+          <div
+            style={{ zIndex: -1 }}
+            className="absolute top-16 -right-4 size-44 md:size-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-forth animation-delay-2000"
+          ></div>
           <nav className="flex flex-col gap-y-2 pt-6">
             {routes.map((route) => (
               <Button
