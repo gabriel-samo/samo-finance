@@ -35,7 +35,8 @@ app.use(
       "Authorization",
       "Access-Control-Allow-Origin"
     ],
-    maxAge: 86400
+    maxAge: 86400,
+    credentials: true
   })
 );
 const routes = app.route("/accounts", accountsRouter);
