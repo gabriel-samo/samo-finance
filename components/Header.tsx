@@ -11,9 +11,9 @@ const Header = () => {
     <BackgroundGradientAnimation
       gradientBackgroundStart="rgb(5, 150, 105)" // emerald-600
       gradientBackgroundEnd="rgb(5, 150, 105)" // emerald-600
-      firstColor=""
-      secondColor=""
-      thirdColor=""
+      firstColor="52, 211, 153" // emerald-400
+      secondColor="4, 120, 87" // emerald-700
+      thirdColor="rgb(5, 150, 105)" // emerald-600
       fourthColor="52, 211, 153" // emerald-400
       fifthColor="4, 120, 87" // emerald-700
       className=""
