@@ -4,41 +4,41 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
 
-// define the response type
+// Define the response type for the account creation API
 type ResponseType = InferResponseType<typeof client.api.accounts.$post>;
-// define the request type
+// Define the request type for the account creation API
 type RequestType = InferRequestType<typeof client.api.accounts.$post>["json"];
 
-// define the useCreateAccount hook
+// Define the useCreateAccount hook
 export const useCreateAccount = () => {
-  // define the query client
+  // Initialize the query client to manage and invalidate queries
   const queryClient = useQueryClient();
 
-  // define the mutation
+  // Define the mutation for creating a new account
   const mutation = useMutation<ResponseType, Error, RequestType>({
-    // define the mutation function
+    // Define the mutation function to send the request to the server
     mutationFn: async (json) => {
-      // send the request to the server
+      // Send the POST request to create a new account
       const response = await client.api.accounts.$post({ json });
-      // return the response
+      // Return the response data as JSON
       return await response.json();
     },
-    // define the onSuccess callback
+    // Define the onSuccess callback to handle successful account creation
     onSuccess: () => {
-      // show the success toast
+      // Show a success toast notification
       toast.success("Account created successfully");
-      // invalidate the accounts query
+      // Invalidate the accounts query to refresh the data
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
     },
-    // define the onError callback
+    // Define the onError callback to handle errors during account creation
     onError: (error) => {
-      // show the error toast
+      // Show an error toast notification
       toast.error("Failed to create account");
-      // log the error
+      // Log the error to the console for debugging
       console.error(error);
     }
   });
 
-  // return the mutation
+  // Return the mutation object to be used in components
   return mutation;
 };

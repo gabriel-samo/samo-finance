@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { eq } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2";
 import { zValidator } from "@hono/zod-validator";
@@ -10,80 +9,75 @@ import { db } from "@/db/drizzle";
 import { accounts, insertAccountsSchema } from "@/db/schema";
 import { clerkOptions } from "@/utils/clerkOpions";
 
+// Initialize a new Hono app
 const app = new Hono()
-  // method
+  // Define GET method for the root path
   .get(
-    // path
+    // Path for the GET request
     "/",
-    // middlewares
+    // Middleware for authentication using Clerk
     clerkMiddleware(clerkOptions),
-    // handler. c is the context (request, response, etc...)
+    // Handler function for the GET request
     async (c) => {
-      // get the auth object
+      // Get the authentication object from the context
       const auth = getAuth(c);
 
-      // if the user is not authenticated, return a 401
+      // If the user is not authenticated, return a 401 Unauthorized response
       if (!auth?.userId) {
-        // NEW version of Hono
         return c.json({ error: "Unauthorized" }, 401);
-        // OLD version of Hono
+        // OLD version of Hono commented for future reference
         // throw new HTTPException(401, {
         //   res: c.json({ error: "Unauthorized" }, 401)
         // });
       }
 
-      // get the accounts from the database
+      // Query the database to get accounts for the authenticated user
       const data = await db
-        // select the id and name
         .select({
-          id: accounts.id,
-          name: accounts.name
+          id: accounts.id, // Select the account ID
+          name: accounts.name // Select the account name
         })
-        // from the accounts table
-        .from(accounts)
-        // where the user id is equal to the auth user id
-        .where(eq(accounts.userId, auth.userId));
-      // return the accounts
+        .from(accounts) // From the accounts table
+        .where(eq(accounts.userId, auth.userId)); // Where the user ID matches the authenticated user ID
+
+      // Return the queried accounts as a JSON response
       return c.json({ data });
     }
   )
-  // method
+  // Define POST method for the root path
   .post(
-    // path
+    // Path for the POST request
     "/",
-    // middlewares
+    // Middleware for authentication using Clerk
     clerkMiddleware(clerkOptions),
+    // Middleware for validating the request body using Zod
     zValidator("json", insertAccountsSchema.pick({ name: true })),
-    // handler. c is the context (request, response, etc...)
+    // Handler function for the POST request
     async (c) => {
-      // get the auth object
+      // Get the authentication object from the context
       const auth = getAuth(c);
-      // get the values from the request
+      // Get the validated values from the request body
       const values = c.req.valid("json");
 
-      // if the user is not authenticated, return a 401
+      // If the user is not authenticated, return a 401 Unauthorized response
       if (!auth?.userId) {
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      // destructuring the data to get the inserted data
+      // Insert a new account into the database
       const [data] = await db
-        // insert the account into the database
-        .insert(accounts)
-        // insert the id, user id and values
+        .insert(accounts) // Insert into the accounts table
         .values({
-          // generate a new id
-          id: createId(),
-          // set the user id to the auth user id
-          userId: auth.userId,
-          // set the name to the name from the request
-          ...values
+          id: createId(), // Generate a new ID for the account
+          userId: auth.userId, // Set the user ID to the authenticated user ID
+          ...values // Set the account name from the request body
         })
-        // return the inserted data
-        .returning();
+        .returning(); // Return the inserted data
 
+      // Return the inserted account as a JSON response
       return c.json({ data });
     }
   );
 
+// Export the Hono app as the default export
 export default app;

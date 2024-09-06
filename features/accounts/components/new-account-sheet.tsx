@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import { z } from "zod";
 
 import { insertAccountsSchema } from "@/db/schema";
@@ -13,19 +14,27 @@ import {
   SheetTitle
 } from "@/components/ui/sheet";
 
+// Define the form schema using Zod, picking only the 'name' field from the insertAccountsSchema
 const formSchema = insertAccountsSchema.pick({
   name: true
 });
 
+// Define the type for form values based on the schema
 type FormValues = z.input<typeof formSchema>;
 
+// NewAccountSheet component for creating a new account
 const NewAccountSheet = () => {
+  // Use the custom hook to manage the sheet's open/close state
   const { isOpen, onClose } = useNewAccount();
 
+  // Use the custom hook to handle account creation
   const mutation = useCreateAccount();
 
+  // Handle form submission
   const onSubmit = (values: FormValues) => {
+    // Trigger the account creation mutation
     mutation.mutate(values, {
+      // Close the sheet on successful account creation
       onSuccess: () => {
         onClose();
       }
@@ -35,6 +44,7 @@ const NewAccountSheet = () => {
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="space-y-4 overflow-clip">
+        {/* Decorative background elements */}
         <div className="relative">
           <div
             style={{ zIndex: -1 }}
@@ -45,12 +55,14 @@ const NewAccountSheet = () => {
             className="absolute top-16 -right-4 size-44 md:size-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-forth animation-delay-2000"
           ></div>
         </div>
+        {/* Sheet header with title and description */}
         <SheetHeader>
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>
             Create a new account to track your transactions.
           </SheetDescription>
         </SheetHeader>
+        {/* Account creation form */}
         <AccountForm
           onSubmit={onSubmit}
           disabled={mutation.isPending}

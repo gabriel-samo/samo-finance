@@ -4,12 +4,12 @@ import { Menu } from "lucide-react";
 import { useMedia } from "react-use";
 import { usePathname, useRouter } from "next/navigation";
 
+import { cn } from "@/lib/utils";
 import NavButton from "./NavButton";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 
+// Define the routes for the navigation menu
 const routes = [
   {
     href: "/",
@@ -30,17 +30,22 @@ const routes = [
 ];
 
 const Navigation = () => {
+  // State to manage the open/close state of the mobile navigation sheet
   const [isOpen, setIsOpen] = useState(false);
 
+  // Hooks to get the current router and pathname
   const router = useRouter();
   const pathname = usePathname();
+  // Hook to determine if the screen size is mobile
   const isMobile = useMedia("(max-width: 1024px)", false);
 
+  // Function to handle navigation and close the sheet
   const onClick = (href: string) => {
     router.push(href);
     setIsOpen(false);
   };
 
+  // Render mobile navigation if the screen size is mobile
   if (isMobile) {
     return (
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -54,6 +59,7 @@ const Navigation = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="px-2 overflow-clip">
+          {/* Decorative background elements */}
           <div
             style={{ zIndex: -1 }}
             className="absolute top-0 -left-4 size-44 md:size-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-first"
@@ -62,6 +68,7 @@ const Navigation = () => {
             style={{ zIndex: -1 }}
             className="absolute top-16 -right-4 size-44 md:size-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-forth animation-delay-2000"
           ></div>
+          {/* Navigation menu for mobile */}
           <nav className="flex flex-col gap-y-2 pt-6">
             {routes.map((route) => (
               <Button
@@ -82,6 +89,7 @@ const Navigation = () => {
     );
   }
 
+  // Render desktop navigation if the screen size is not mobile
   return (
     <nav className="hidden lg:flex items-center gap-x-2 overflow-x-auto">
       {routes.map((route) => (
