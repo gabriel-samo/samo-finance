@@ -1,5 +1,6 @@
+import { z } from "zod";
 import { Hono } from "hono";
-import { eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2";
 import { zValidator } from "@hono/zod-validator";
 // import { HTTPException } from "hono/http-exception";
@@ -75,6 +76,49 @@ const app = new Hono()
         .returning(); // Return the inserted data
 
       // Return the inserted account as a JSON response
+      return c.json({ data });
+    }
+  )
+  // Define POST method for bulk delete
+  .post(
+    // Path for the POST request
+    "/bulk-delete",
+    // Middleware for authentication using Clerk
+    clerkMiddleware(clerkOptions),
+    // Middleware for validating the request body using Zod
+    zValidator(
+      "json",
+      z.object({
+        ids: z.array(z.string()) // Validate that the request body contains an array of strings (account IDs)
+      })
+    ),
+    // Handler function for the POST request
+    async (c) => {
+      // Get the authentication object from the context
+      const auth = getAuth(c);
+      // Get the validated values from the request body
+      const values = c.req.valid("json");
+
+      // If the user is not authenticated, return a 401 Unauthorized response
+      if (!auth?.userId) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      // Delete accounts from the database where the user ID matches the authenticated user ID
+      // and the account ID is in the list of IDs provided in the request body
+      const data = await db
+        .delete(accounts) // Delete from the accounts table
+        .where(
+          and(
+            eq(accounts.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
+            inArray(accounts.id, values.ids) // Ensure the account ID is in the list of IDs provided
+          )
+        )
+        .returning({
+          id: accounts.id // Return the ID of the deleted accounts
+        });
+
+      // Return the deleted account IDs as a JSON response
       return c.json({ data });
     }
   );

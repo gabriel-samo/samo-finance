@@ -16,12 +16,12 @@ const Header = () => {
       thirdColor="rgb(5, 150, 105)" // emerald-600
       fourthColor="52, 211, 153" // emerald-400
       fifthColor="4, 120, 87" // emerald-700
-      className=""
+      className="z-0 w-screen"
       size="200%"
       containerClassName="h-96"
       interactive={false}
     >
-      <header className="absolute z-50 inset-0 px-4 py-8 lg:px-14 pb-36">
+      <header className="absolute z-10 inset-0 px-4 py-8 lg:px-14 pb-36">
         <div className="max-w-screen-2xl mx-auto">
           <div className="w-full flex items-center justify-between mb-14">
             <div className="flex items-center lg:gap-x-16">

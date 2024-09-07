@@ -33,7 +33,12 @@ export default function RootLayout({
     // Provide Clerk authentication context to the application
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body
+          className={inter.className}
+          style={{
+            overflowX: "clip"
+          }}
+        >
           {/* Provide Query context for data fetching */}
           <QueryProvider>
             {/* Provide Sheet context for managing sheets */}
