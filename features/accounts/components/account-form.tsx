@@ -12,8 +12,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage
+  FormLabel
 } from "@/components/ui/form";
 
 // Define the form schema using Zod, picking only the 'name' field from the insertAccountsSchema
@@ -103,3 +102,36 @@ export const AccountForm = ({
     </Form>
   );
 };
+
+/*
+  Detailed Comments for Future Reference:
+
+  1. formSchema: This schema is defined using Zod and picks only the 'name' field from the insertAccountsSchema.
+     It ensures that the form data structure is correctly typed and validated.
+
+  2. FormValues: This type is inferred from the formSchema and represents the structure of the form values.
+     It ensures that the form values are correctly typed.
+
+  3. Props: This type defines the props for the AccountForm component.
+     - id: An optional string representing the account ID for existing accounts.
+     - defaultValues: An optional object representing the default form values.
+     - onSubmit: A function to handle form submission, which takes the form values as a parameter.
+     - onDelete: An optional function to handle account deletion.
+     - disabled: A boolean flag to disable form inputs.
+
+  4. AccountForm Component: This component is designed to handle the account creation and editing functionality.
+     - It initializes the form using react-hook-form with Zod for validation and default values.
+     - handleSubmit: This function is called when the form is submitted and triggers the onSubmit prop with the form values.
+     - handleDelete: This function is called when the delete button is clicked and triggers the onDelete prop if provided.
+     - The form is rendered using the Form component from shadcn/ui, with fields for account name, submit button, and delete button.
+     - The submit button text changes based on whether the id prop is provided (indicating an existing account).
+     - The delete button is only shown if the id prop is provided.
+
+  5. FormField: This component is used to render the form field for the account name.
+     - It uses the control from react-hook-form to manage the form state.
+     - The Input component is used for the input field, with a placeholder and disabled state based on the disabled prop.
+
+  6. Button: This component is used for the submit and delete buttons.
+     - The submit button is disabled based on the disabled prop and shows a loading spinner if disabled.
+     - The delete button is only shown for existing accounts (when the id prop is provided) and triggers the handleDelete function when clicked.
+*/

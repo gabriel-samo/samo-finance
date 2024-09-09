@@ -52,5 +52,37 @@ export const POST = handle(
   })
 );
 
+// Handle PATCH requests with error handling
+export const PATCH = handle(
+  app.onError((err, c) => {
+    console.error(err); // Log the error to the console
+    return c.json(
+      {
+        message: err.message, // Return the error message
+        stack: err.stack, // Return the error stack trace
+        cause: err.cause, // Return the error cause
+        name: err.name // Return the error name
+      },
+      500 // Return a 500 Internal Server Error status
+    );
+  })
+);
+
+// Handle DELETE requests with error handling
+export const DELETE = handle(
+  app.onError((err, c) => {
+    console.error(err); // Log the error to the console
+    return c.json(
+      {
+        message: err.message, // Return the error message
+        stack: err.stack, // Return the error stack trace
+        cause: err.cause, // Return the error cause
+        name: err.name // Return the error name
+      },
+      500 // Return a 500 Internal Server Error status
+    );
+  })
+);
+
 // Define the type for the routes
 export type AppType = typeof routes;
