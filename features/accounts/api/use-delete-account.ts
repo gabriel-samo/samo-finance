@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import type { InferRequestType, InferResponseType } from "hono";
+import type { InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";

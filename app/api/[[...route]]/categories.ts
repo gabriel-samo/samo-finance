@@ -3,12 +3,11 @@ import { Hono } from "hono";
 import { and, eq, inArray } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2";
 import { zValidator } from "@hono/zod-validator";
-// import { HTTPException } from "hono/http-exception";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 
 import { db } from "@/db/drizzle";
-import { accounts, insertAccountSchema } from "@/db/schema";
 import { clerkOptions } from "@/utils/clerkOpions";
+import { categories, insertCategorySchema } from "@/db/schema";
 
 // Initialize a new Hono app
 const app = new Hono()
@@ -26,22 +25,18 @@ const app = new Hono()
       // If the user is not authenticated, return a 401 Unauthorized response
       if (!auth?.userId) {
         return c.json({ error: "Unauthorized" }, 401);
-        // OLD version of Hono commented for future reference
-        // throw new HTTPException(401, {
-        //   res: c.json({ error: "Unauthorized" }, 401)
-        // });
       }
 
-      // Query the database to get accounts for the authenticated user
+      // Query the database to get categories for the authenticated user
       const data = await db
         .select({
-          id: accounts.id, // Select the account ID
-          name: accounts.name // Select the account name
+          id: categories.id, // Select the category ID
+          name: categories.name // Select the category name
         })
-        .from(accounts) // From the accounts table
-        .where(eq(accounts.userId, auth.userId)); // Where the user ID matches the authenticated user ID
+        .from(categories) // From the categories table
+        .where(eq(categories.userId, auth.userId)); // Where the user ID matches the authenticated user ID
 
-      // Return the queried accounts as a JSON response
+      // Return the queried categories as a JSON response
       return c.json({ data });
     }
   )
@@ -75,21 +70,21 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      // Query the database to get the account with the specified ID for the authenticated user
+      // Query the database to get the category with the specified ID for the authenticated user
       const [data] = await db
         .select({
-          id: accounts.id, // Select the account ID
-          name: accounts.name // Select the account name
+          id: categories.id, // Select the category ID
+          name: categories.name // Select the category name
         })
-        .from(accounts) // From the accounts table
-        .where(and(eq(accounts.userId, auth.userId), eq(accounts.id, id))); // Where the user ID matches the authenticated user ID and the account ID matches the specified ID
+        .from(categories) // From the categories table
+        .where(and(eq(categories.userId, auth.userId), eq(categories.id, id))); // Where the user ID matches the authenticated user ID and the category ID matches the specified ID
 
-      // If no account is found, return a 404 Not Found response
+      // If no category is found, return a 404 Not Found response
       if (!data) {
         return c.json({ error: "Not found" }, 404);
       }
 
-      // Return the queried account as a JSON response
+      // Return the queried category as a JSON response
       return c.json({ data });
     }
   )
@@ -100,7 +95,7 @@ const app = new Hono()
     // Middleware for authentication using Clerk
     clerkMiddleware(clerkOptions),
     // Middleware for validating the request body using Zod
-    zValidator("json", insertAccountSchema.pick({ name: true })),
+    zValidator("json", insertCategorySchema.pick({ name: true })),
     // Handler function for the POST request
     async (c) => {
       // Get the authentication object from the context
@@ -113,17 +108,17 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      // Insert a new account into the database
+      // Insert a new category into the database
       const [data] = await db
-        .insert(accounts) // Insert into the accounts table
+        .insert(categories) // Insert into the categories table
         .values({
-          id: createId(), // Generate a new ID for the account
+          id: createId(), // Generate a new ID for the category
           userId: auth.userId, // Set the user ID to the authenticated user ID
-          ...values // Set the account name from the request body
+          ...values // Set the category name from the request body
         })
         .returning(); // Return the inserted data
 
-      // Return the inserted account as a JSON response
+      // Return the inserted category as a JSON response
       return c.json({ data });
     }
   )
@@ -137,7 +132,7 @@ const app = new Hono()
     zValidator(
       "json",
       z.object({
-        ids: z.array(z.string()) // Validate that the request body contains an array of strings (account IDs)
+        ids: z.array(z.string()) // Validate that the request body contains an array of strings (category IDs)
       })
     ),
     // Handler function for the POST request
@@ -152,25 +147,25 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      // Delete accounts from the database where the user ID matches the authenticated user ID
-      // and the account ID is in the list of IDs provided in the request body
+      // Delete categories from the database where the user ID matches the authenticated user ID
+      // and the category ID is in the list of IDs provided in the request body
       const data = await db
-        .delete(accounts) // Delete from the accounts table
+        .delete(categories) // Delete from the categories table
         .where(
           and(
-            eq(accounts.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
-            inArray(accounts.id, values.ids) // Ensure the account ID is in the list of IDs provided
+            eq(categories.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
+            inArray(categories.id, values.ids) // Ensure the category ID is in the list of IDs provided
           )
         )
         .returning({
-          id: accounts.id // Return the ID of the deleted accounts
+          id: categories.id // Return the ID of the deleted categories
         });
 
-      // Return the deleted account IDs as a JSON response
+      // Return the deleted category IDs as a JSON response
       return c.json({ data });
     }
   )
-  // Define the PATCH method for updating an account by its ID
+  // Define the PATCH method for updating a category by its ID
   .patch(
     // Path for the PATCH request
     "/:id",
@@ -178,8 +173,8 @@ const app = new Hono()
     clerkMiddleware(clerkOptions),
     // Middleware for validating the request parameter 'id' using Zod
     zValidator("param", z.object({ id: z.string().optional() })),
-    // Middleware for validating the request body using Zod, picking only the 'name' field from the insertAccountSchema
-    zValidator("json", insertAccountSchema.pick({ name: true })),
+    // Middleware for validating the request body using Zod, picking only the 'name' field from the insertCategoriesSchema
+    zValidator("json", insertCategorySchema.pick({ name: true })),
     // Handler function for the PATCH request
     async (c) => {
       // Get the authentication object from the context
@@ -199,29 +194,29 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      // Update the account in the database where the user ID matches the authenticated user ID
-      // and the account ID matches the provided 'id', then return the updated account data
+      // Update the category in the database where the user ID matches the authenticated user ID
+      // and the category ID matches the provided 'id', then return the updated category data
       const [data] = await db
-        .update(accounts) // Update the accounts table
-        .set(values) // Set the new values for the account
+        .update(categories) // Update the categories table
+        .set(values) // Set the new values for the category
         .where(
           and(
-            eq(accounts.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
-            eq(accounts.id, id) // Ensure the account ID matches the provided 'id'
+            eq(categories.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
+            eq(categories.id, id) // Ensure the category ID matches the provided 'id'
           )
         )
-        .returning(); // Return the updated account data
+        .returning(); // Return the updated category data
 
-      // If no account was found and updated, return a 404 Not Found response
+      // If no category was found and updated, return a 404 Not Found response
       if (!data) {
         return c.json({ error: "Not found" }, 404);
       }
 
-      // Return the updated account data as a JSON response
+      // Return the updated category data as a JSON response
       return c.json({ data });
     }
   )
-  // Define the DELETE method for deleting an account by its ID
+  // Define the DELETE method for deleting a category by its ID
   .delete(
     // Path for the DELETE request
     "/:id",
@@ -246,24 +241,24 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      // Delete the account in the database where the user ID matches the authenticated user ID
-      // and the account ID matches the provided 'id', then return the deleted account data
+      // Delete the category in the database where the user ID matches the authenticated user ID
+      // and the category ID matches the provided 'id', then return the deleted category data
       const [data] = await db
-        .delete(accounts) // Delete from the accounts table
+        .delete(categories) // Delete from the categories table
         .where(
           and(
-            eq(accounts.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
-            eq(accounts.id, id) // Ensure the account ID matches the provided 'id'
+            eq(categories.userId, auth.userId), // Ensure the user ID matches the authenticated user ID
+            eq(categories.id, id) // Ensure the category ID matches the provided 'id'
           )
         )
-        .returning({ id: accounts.id }); // Return the deleted account id
+        .returning({ id: categories.id }); // Return the deleted category id
 
-      // If no account was found and deleted, return a 404 Not Found response
+      // If no category was found and deleted, return a 404 Not Found response
       if (!data) {
         return c.json({ error: "Not found" }, 404);
       }
 
-      // Return the deleted account data as a JSON response
+      // Return the deleted category data as a JSON response
       return c.json({ data });
     }
   );

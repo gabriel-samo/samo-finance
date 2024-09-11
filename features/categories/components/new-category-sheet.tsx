@@ -1,10 +1,10 @@
 // Import necessary dependencies and components
 import { z } from "zod";
 
-import { insertAccountSchema } from "@/db/schema";
-import { AccountForm } from "@/features/accounts/components/account-form";
-import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
-import { useCreateAccount } from "@/features/accounts/api/use-create-account";
+import { insertCategorySchema } from "@/db/schema";
+import { CategoryForm } from "@/features/categories/components/category-form";
+import { useNewCategory } from "@/features/categories/hooks/use-new-category";
+import { useCreateCategory } from "@/features/categories/api/use-create-category";
 
 import {
   Sheet,
@@ -14,27 +14,27 @@ import {
   SheetTitle
 } from "@/components/ui/sheet";
 
-// Define the form schema using Zod, picking only the 'name' field from the insertAccountSchema
-const formSchema = insertAccountSchema.pick({
+// Define the form schema using Zod, picking only the 'name' field from the insertCategorySchema
+const formSchema = insertCategorySchema.pick({
   name: true
 });
 
 // Define the type for form values based on the schema
 type FormValues = z.input<typeof formSchema>;
 
-// NewAccountSheet component for creating a new account
-const NewAccountSheet = () => {
+// NewCategorySheet component for creating a new category
+const NewCategorySheet = () => {
   // Use the custom hook to manage the sheet's open/close state
-  const { isOpen, onClose } = useNewAccount();
+  const { isOpen, onClose } = useNewCategory();
 
-  // Use the custom hook to handle account creation
-  const mutation = useCreateAccount();
+  // Use the custom hook to handle category creation
+  const mutation = useCreateCategory();
 
   // Handle form submission
   const onSubmit = (values: FormValues) => {
-    // Trigger the account creation mutation
+    // Trigger the category creation mutation
     mutation.mutate(values, {
-      // Close the sheet on successful account creation
+      // Close the sheet on successful category creation
       onSuccess: () => {
         onClose();
       }
@@ -57,13 +57,13 @@ const NewAccountSheet = () => {
         </div>
         {/* Sheet header with title and description */}
         <SheetHeader>
-          <SheetTitle>New Account</SheetTitle>
+          <SheetTitle>New Category</SheetTitle>
           <SheetDescription>
-            Create a new account to track your transactions.
+            Create a new category to organize your transactions.
           </SheetDescription>
         </SheetHeader>
-        {/* Account creation form */}
-        <AccountForm
+        {/* Category creation form */}
+        <CategoryForm
           onSubmit={onSubmit}
           disabled={mutation.isPending}
           defaultValues={{
@@ -75,4 +75,4 @@ const NewAccountSheet = () => {
   );
 };
 
-export default NewAccountSheet;
+export default NewCategorySheet;

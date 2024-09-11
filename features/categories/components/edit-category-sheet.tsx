@@ -1,12 +1,12 @@
 // Import necessary dependencies and components
 import { z } from "zod";
 
-import { insertAccountSchema } from "@/db/schema";
-import { useGetAccount } from "@/features/accounts/api/use-get-account";
-import { AccountForm } from "@/features/accounts/components/account-form";
-import { useEditAccount } from "@/features/accounts/api/use-edit-account";
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
-import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
+import { insertCategorySchema } from "@/db/schema";
+import { useGetCategory } from "@/features/categories/api/use-get-category";
+import { CategoryForm } from "@/features/categories/components/category-form";
+import { useEditCategory } from "@/features/categories/api/use-edit-category";
+import { useOpenCategory } from "@/features/categories/hooks/use-open-category";
+import { useDeleteCategory } from "@/features/categories/api/use-delete-category";
 
 import { useConfirm } from "@/hooks/use-confirm";
 
@@ -19,56 +19,56 @@ import {
 } from "@/components/ui/sheet";
 import { Loader2 } from "lucide-react";
 
-// Define the form schema using Zod, picking only the 'name' field from the insertAccountSchema
-const formSchema = insertAccountSchema.pick({
+// Define the form schema using Zod, picking only the 'name' field from the insertCategorySchema
+const formSchema = insertCategorySchema.pick({
   name: true
 });
 
 // Define the type for form values based on the schema
 type FormValues = z.input<typeof formSchema>;
 
-// EditAccountSheet component for editing an existing account
-const EditAccountSheet = () => {
-  // Use the custom hook to manage the sheet's open/close state and get the account ID
-  const { isOpen, onClose, id } = useOpenAccount();
+// EditCategorySheet component for editing an existing category
+const EditCategorySheet = () => {
+  // Use the custom hook to manage the sheet's open/close state and get the category ID
+  const { isOpen, onClose, id } = useOpenCategory();
 
   // Initialize the confirmation dialog with a message and description
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this account. This action cannot be undone."
+    "You are about to delete this category. This action cannot be undone."
   );
 
-  // Use the custom hook to fetch the account data based on the ID
-  const accountQuery = useGetAccount(id);
-  // Use the custom hook to handle account editing
-  const editMutation = useEditAccount(id);
-  // Use the custom hook to handle account deletion
-  const deleteMutation = useDeleteAccount(id);
+  // Use the custom hook to fetch the category data based on the ID
+  const categoryQuery = useGetCategory(id);
+  // Use the custom hook to handle category editing
+  const editMutation = useEditCategory(id);
+  // Use the custom hook to handle category deletion
+  const deleteMutation = useDeleteCategory(id);
 
-  // Determine if any mutation is pending or if the account data is loading
+  // Determine if any mutation is pending or if the category data is loading
   const isPending = editMutation.isPending || deleteMutation.isPending;
-  const isLoading = accountQuery.isLoading;
+  const isLoading = categoryQuery.isLoading;
 
   // Handle form submission
   const onSubmit = (values: FormValues) => {
-    // Trigger the account edit mutation
+    // Trigger the category edit mutation
     editMutation.mutate(values, {
-      // Close the sheet on successful account edit
+      // Close the sheet on successful category edit
       onSuccess: () => {
         onClose();
       }
     });
   };
 
-  // Handle account deletion
+  // Handle category deletion
   const onDelete = async () => {
     // Show the confirmation dialog and wait for user response
     const ok = await confirm();
 
     if (ok) {
-      // Trigger the account delete mutation
+      // Trigger the category delete mutation
       deleteMutation.mutate(undefined, {
-        // Close the sheet on successful account deletion
+        // Close the sheet on successful category deletion
         onSuccess: () => {
           onClose();
         }
@@ -76,10 +76,10 @@ const EditAccountSheet = () => {
     }
   };
 
-  // Set default form values based on the fetched account data
-  const defaultValues = accountQuery.data
+  // Set default form values based on the fetched category data
+  const defaultValues = categoryQuery.data
     ? {
-        name: accountQuery.data.name
+        name: categoryQuery.data.name
       }
     : {
         name: ""
@@ -105,17 +105,17 @@ const EditAccountSheet = () => {
           </div>
           {/* Sheet header with title and description */}
           <SheetHeader>
-            <SheetTitle>Edit Account</SheetTitle>
-            <SheetDescription>Edit an existing account.</SheetDescription>
+            <SheetTitle>Edit Category</SheetTitle>
+            <SheetDescription>Edit an existing category.</SheetDescription>
           </SheetHeader>
           {isLoading ? (
-            // Show a loading spinner while the account data is being fetched
+            // Show a loading spinner while the category data is being fetched
             <div className="absolute inset-0 flex items-center justify-center">
               <Loader2 className="size-4 text-muted-foreground animate-spin" />
             </div>
           ) : (
-            /* Account form for editing the account */
-            <AccountForm
+            /* Category form for editing the category */
+            <CategoryForm
               id={id}
               onSubmit={onSubmit}
               disabled={isPending}
@@ -129,4 +129,4 @@ const EditAccountSheet = () => {
   );
 };
 
-export default EditAccountSheet;
+export default EditCategorySheet;
