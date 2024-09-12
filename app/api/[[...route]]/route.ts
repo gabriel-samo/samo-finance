@@ -1,7 +1,9 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
+
 import accountsRouter from "./accounts";
 import categoriesRouter from "./categories";
+import transactionsRouter from "./transactions";
 // import { HTTPException } from "hono/http-exception";
 
 // Specify the runtime environment for the application
@@ -23,7 +25,9 @@ const routes = app
   // Define the route for the accounts API
   .route("/accounts", accountsRouter)
   // Define the route for the categories API
-  .route("/categories", categoriesRouter);
+  .route("/categories", categoriesRouter)
+  // Define the route for the transactions API
+  .route("/transactions", transactionsRouter);
 
 // Handle GET requests with error handling
 export const GET = handle(
