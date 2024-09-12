@@ -18,7 +18,7 @@ import {
 
 // Initialize a new Hono app
 const app = new Hono()
-  // Define GET method for the root path
+  // Define GET method for root path to get all transactions
   .get(
     // Path for the GET request
     "/",
@@ -58,9 +58,6 @@ const app = new Hono()
         ? moment(moment(to).format("YYYY-MM-DD")).toDate()
         : defaultTo;
 
-      console.log("startDate", startDate); // Log the start date for debugging
-      console.log("endDate", endDate); // Log the end date for debugging
-
       // Query the database to get transactions for the authenticated user
       const data = await db
         .select({
@@ -90,7 +87,7 @@ const app = new Hono()
       return c.json({ data });
     }
   )
-  // Define GET method for the path with an ID parameter
+  // Define GET method for the path with an ID parameter for a single transaction
   .get(
     // Path for the GET request
     "/:id",
@@ -144,7 +141,7 @@ const app = new Hono()
       return c.json({ data });
     }
   )
-  // Define POST method for the root path
+  // Define POST method for the root path for creating a single transaction
   .post(
     // Path for the POST request
     "/",
@@ -174,6 +171,42 @@ const app = new Hono()
         .returning(); // Return the inserted data
 
       // Return the inserted transaction as a JSON response
+      return c.json({ data });
+    }
+  )
+  // Path for the POST request to bulk create transactions
+  .post(
+    // Path for the POST request
+    "/bulk-create",
+    // Middleware for authentication using Clerk
+    clerkMiddleware(clerkOptions),
+    // Middleware for validating the request body using Zod
+    zValidator("json", z.array(insertTransactionSchema.omit({ id: true }))),
+    // Handler function for the POST request
+    async (c) => {
+      // Get the authentication object from the context
+      const auth = getAuth(c);
+      // Get the validated values from the request body
+      const values = c.req.valid("json");
+
+      // If the user is not authenticated, return a 401 Unauthorized response
+      if (!auth?.userId) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      // Insert multiple new transactions into the database
+      const data = await db
+        .insert(transactions) // Insert into the transactions table
+        .values(
+          // Map over the values to add a new ID for each transaction
+          values.map((value) => ({
+            id: createId(), // Generate a new ID for each transaction
+            ...value // Set the transaction details from the request body
+          }))
+        )
+        .returning(); // Return the inserted data
+
+      // Return the inserted transactions as a JSON response
       return c.json({ data });
     }
   )
