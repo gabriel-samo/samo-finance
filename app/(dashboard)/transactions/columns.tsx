@@ -1,18 +1,23 @@
 "use client";
-
 // Import necessary types and components
+import { format } from "date-fns";
 import { InferResponseType } from "hono";
 import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Actions } from "./actions";
 import { client } from "@/lib/hono";
+import { formatCurrency } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
+import { Actions } from "./actions";
+import { AccountColumn } from "./account-column";
+import { CategoryColumn } from "./category-column";
+
 // Define the type for the response data from the API
 export type ResponseType = InferResponseType<
-  typeof client.api.accounts.$get,
+  typeof client.api.transactions.$get,
   200
 >["data"][0];
 
@@ -43,7 +48,7 @@ export const columns: ColumnDef<ResponseType>[] = [
     enableHiding: false // Disable hiding for this column
   },
   {
-    accessorKey: "name", // Accessor key for the 'name' field
+    accessorKey: "date", // Accessor key for the 'name' field
     header: ({ column }) => {
       return (
         // Button to toggle sorting for the 'name' column
@@ -51,10 +56,106 @@ export const columns: ColumnDef<ResponseType>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} // Toggle sorting direction
         >
-          Name
+          Date
           <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
           {/* Icon indicating sorting */}
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const date = row.getValue("date") as Date;
+      return <span>{format(date, "dd/MM/yyyy")}</span>;
+    }
+  },
+  {
+    accessorKey: "category", // Accessor key for the 'name' field
+    header: ({ column }) => {
+      return (
+        // Button to toggle sorting for the 'name' column
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} // Toggle sorting direction
+        >
+          Category
+          <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
+          {/* Icon indicating sorting */}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <CategoryColumn
+          id={row.original.id}
+          category={row.original.category}
+          categoryId={row.original.categoryId}
+        />
+      );
+    }
+  },
+  {
+    accessorKey: "payee", // Accessor key for the 'name' field
+    header: ({ column }) => {
+      return (
+        // Button to toggle sorting for the 'name' column
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} // Toggle sorting direction
+        >
+          Payee
+          <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
+          {/* Icon indicating sorting */}
+        </Button>
+      );
+    }
+  },
+  {
+    accessorKey: "amount", // Accessor key for the 'name' field
+    header: ({ column }) => {
+      return (
+        // Button to toggle sorting for the 'name' column
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} // Toggle sorting direction
+        >
+          Amount
+          <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
+          {/* Icon indicating sorting */}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("amount"));
+      return (
+        <Badge
+          variant={amount > 0 ? "primary" : "destructive"}
+          className="text-xs font-medium px-3.5 py-2.5"
+        >
+          {formatCurrency(amount)}
+        </Badge>
+      );
+    }
+  },
+  {
+    accessorKey: "account", // Accessor key for the 'name' field
+    header: ({ column }) => {
+      return (
+        // Button to toggle sorting for the 'name' column
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} // Toggle sorting direction
+        >
+          Account
+          <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
+          {/* Icon indicating sorting */}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <AccountColumn
+          account={row.original.account}
+          accountId={row.original.accountId}
+        />
       );
     }
   },

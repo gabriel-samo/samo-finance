@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 import { client } from "@/lib/hono";
+import { convertAmountFromMiliunits } from "@/lib/utils";
 
 // Custom hook to get all transactions
 export const useGetTransactions = () => {
@@ -45,7 +46,11 @@ export const useGetTransactions = () => {
 
       // Return the data to be used by the query
       // This data will be available in the query result under the 'data' field
-      return data;
+      // Convert the amount from miliunits to units
+      return data.map((transaction) => ({
+        ...transaction,
+        amount: convertAmountFromMiliunits(transaction.amount)
+      }));
     }
   });
 

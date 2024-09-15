@@ -33,7 +33,8 @@ export const useDeleteCategory = (id?: string) => {
       queryClient.invalidateQueries({ queryKey: ["category", { id }] });
       // Invalidate the categories query to refresh the list of categories
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      // TODO: Invalidate summary and transactions queries if necessary
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      // TODO: Invalidate summary
     },
     // Define the onError callback to handle errors during category deletion
     onError: (error) => {

@@ -33,7 +33,8 @@ export const useDeleteAccount = (id?: string) => {
       queryClient.invalidateQueries({ queryKey: ["account", { id }] });
       // Invalidate the accounts query to refresh the list of accounts
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      // TODO: Invalidate summary and transactions queries if necessary
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      // TODO: Invalidate summary
     },
     // Define the onError callback to handle errors during account deletion
     onError: (error) => {

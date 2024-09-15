@@ -14,8 +14,8 @@ type RequestType = InferRequestType<
 >["json"];
 
 // Define the useEditCategory hook
+// Initialize the query client to manage and invalidate queries
 export const useEditCategory = (id?: string) => {
-  // Initialize the query client to manage and invalidate queries
   const queryClient = useQueryClient();
 
   // Define the mutation for updating an existing category
@@ -38,7 +38,8 @@ export const useEditCategory = (id?: string) => {
       queryClient.invalidateQueries({ queryKey: ["category", { id }] });
       // Invalidate the categories query to refresh the list of categories
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      // TODO: Invalidate summary and transactions queries if necessary
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      // TODO: Invalidate summary
     },
     // Define the onError callback to handle errors during category update
     onError: (error) => {
