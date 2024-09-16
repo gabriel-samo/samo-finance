@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 
+import summaryRouter from "./summary";
 import accountsRouter from "./accounts";
 import categoriesRouter from "./categories";
 import transactionsRouter from "./transactions";
@@ -22,6 +23,8 @@ const app = new Hono().basePath("/api");
 
 // Define routes for the accounts API
 const routes = app
+  // Define the route for the summary API
+  .route("/summary", summaryRouter)
   // Define the route for the accounts API
   .route("/accounts", accountsRouter)
   // Define the route for the categories API

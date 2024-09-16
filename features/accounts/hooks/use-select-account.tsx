@@ -14,42 +14,54 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 
+// Custom hook to handle account selection with a confirmation dialog
 export function useSelectAccount(): [
   () => JSX.Element,
   () => Promise<unknown>
 ] {
+  // Fetch accounts using custom hook
   const accountQuery = useGetAccounts();
+  // Create account mutation hook
   const accountMutatoin = useCreateAccount();
+  // Function to handle account creation
   const onCreateAccount = (name: string) => accountMutatoin.mutate({ name });
+  // Map account data to options for the select component
   const accountOptions = (accountQuery.data ?? []).map((account) => ({
     label: account.name,
     value: account.id
   }));
 
+  // State to manage the promise for confirmation
   const [promise, setPromise] = useState<{
     resolve: (value: string | undefined) => void;
   } | null>(null);
+  // Ref to store the selected value
   const selectValue = useRef<string>();
 
+  // Function to initiate the confirmation process
   const confirm = () =>
     new Promise((resolve, reject) => {
       setPromise({ resolve });
     });
 
+  // Function to handle dialog close
   const handleClose = () => {
     setPromise(null);
   };
 
+  // Function to handle confirmation
   const handleConfirm = () => {
     promise?.resolve(selectValue.current);
     handleClose();
   };
 
+  // Function to handle cancellation
   const handleCancel = () => {
     promise?.resolve(undefined);
     handleClose();
   };
 
+  // Component to render the confirmation dialog
   const ConfirmationDialog = () => (
     <Dialog open={promise !== null}>
       <DialogContent>
@@ -76,5 +88,6 @@ export function useSelectAccount(): [
     </Dialog>
   );
 
+  // Return the dialog component and the confirm function
   return [ConfirmationDialog, confirm];
 }

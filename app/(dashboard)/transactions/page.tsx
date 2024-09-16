@@ -68,20 +68,26 @@ const TransactionsPage = () => {
   const isDisabled =
     transactionsQuery.isLoading || deleteTransactions.isPending;
 
+  // Function to handle the submission of imported transactions
   const onSubmitImport = async (
     values: (typeof transactionsSchema.$inferInsert)[]
   ) => {
+    // Prompt the user to select an account
     const accountId = await confirm();
 
+    // If no account is selected, show an error message and return
     if (!accountId) return toast.error("Please select an account to continue.");
 
+    // Map the imported values to include the selected account ID
     const data = values.map((value) => ({
       ...value,
       accountId: accountId as string
     }));
 
+    // Use the createTransactions hook to submit the data
     createTransactions.mutate(data, {
       onSuccess: () => {
+        // On success, reset the import state and switch back to the LIST variant
         onCancelImport();
       }
     });

@@ -122,3 +122,36 @@ const NewTransactionSheet = () => {
 };
 
 export default NewTransactionSheet;
+
+// Detailed Comments for Future Reference:
+
+/*
+1. formSchema: This schema is defined using Zod and is based on the insertTransactionSchema. 
+   The 'id' field is omitted as it is not required for creating a new transaction.
+
+2. FormValues: This type is derived from the formSchema and represents the structure of the form values.
+
+3. NewTransactionSheet Component:
+   - This component is responsible for rendering the sheet that allows users to create a new transaction.
+   - It uses the useNewTransaction hook to manage the open/close state of the sheet.
+   - It uses the useCreateTransaction hook to handle the creation of a new transaction.
+
+4. Category and Account Data:
+   - The component fetches categories and accounts using the useGetCategories and useGetAccounts hooks respectively.
+   - It also provides functionality to create new categories and accounts using the useCreateCategory and useCreateAccount hooks.
+   - The fetched categories and accounts are mapped to options for dropdown or select inputs in the form.
+
+5. isPending and isLoading:
+   - isPending: This boolean value determines if any mutation (create transaction, create category, create account) is pending.
+   - isLoading: This boolean value determines if any query (fetch categories, fetch accounts) is loading.
+
+6. onSubmit Function:
+   - This function handles the form submission.
+   - It triggers the createMutation to create a new transaction.
+   - On successful creation, it closes the sheet.
+
+7. JSX Structure:
+   - The component renders a Sheet with a SheetContent that contains the form.
+   - If the data is loading, a loading spinner is displayed.
+   - Otherwise, the TransactionForm component is rendered with the necessary props.
+*/

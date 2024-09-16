@@ -185,3 +185,48 @@ const EditTransactionSheet = () => {
 };
 
 export default EditTransactionSheet;
+
+/*
+  Detailed Comments for Future Reference:
+
+  1. formSchema: This schema is defined using Zod and is based on the insertTransactionSchema, 
+     but it omits the 'id' field. This schema is used to validate the form values.
+
+  2. FormValues: This type is derived from the formSchema and represents the structure of the form values.
+
+  3. EditTransactionSheet Component: This component is responsible for rendering the sheet to edit an existing transaction.
+     - It uses the useOpenTransaction hook to manage the open/close state of the sheet and get the transaction ID.
+     - It initializes a confirmation dialog using the useConfirm hook.
+
+  4. Data Fetching and Mutations:
+     - useGetTransaction: Fetches the transaction data based on the ID.
+     - useEditTransaction: Handles the mutation for editing the transaction.
+     - useDeleteTransaction: Handles the mutation for deleting the transaction.
+     - useGetCategories: Fetches the list of categories.
+     - useCreateCategory: Handles the mutation for creating a new category.
+     - useGetAccounts: Fetches the list of accounts.
+     - useCreateAccount: Handles the mutation for creating a new account.
+
+  5. Category and Account Options:
+     - categoryOptions: Maps the fetched category data to options for a dropdown or select input.
+     - accountOptions: Maps the fetched account data to options for a dropdown or select input.
+
+  6. isPending and isLoading:
+     - isPending: Determines if any mutation is pending or if the transaction data is loading.
+     - isLoading: Determines if the transaction, category, or account data is loading.
+
+  7. onSubmit: Handles the form submission by triggering the editMutation. 
+     On successful transaction edit, it closes the sheet.
+
+  8. onDelete: Handles the transaction deletion by showing a confirmation dialog. 
+     If the user confirms, it triggers the deleteMutation. On successful transaction deletion, it closes the sheet.
+
+  9. defaultValues: Sets the default form values based on the fetched transaction data. 
+     If the transaction data is not available, it sets default empty values.
+
+  10. JSX Structure:
+      - Renders the confirmation dialog.
+      - Renders the sheet component with open state and onOpenChange handler.
+      - Displays a loading spinner if the transaction data is being fetched.
+      - Renders the TransactionForm component for editing the transaction with the necessary props.
+*/
