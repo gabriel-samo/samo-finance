@@ -35,7 +35,7 @@ export const useBulkCreateTransactions = () => {
       toast.success("Transactions created");
       // Invalidate the transactions query to refresh the data
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      // TODO: Also invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     // Define the onError callback to handle errors during transaction deletion
     onError: (error) => {

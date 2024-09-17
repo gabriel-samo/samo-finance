@@ -33,7 +33,7 @@ export const useDeleteTransaction = (id?: string) => {
       queryClient.invalidateQueries({ queryKey: ["transaction", { id }] });
       // Invalidate the transactions query to refresh the list of transactions
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      // TODO: Invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     // Define the onError callback to handle errors during transaction deletion
     onError: (error) => {

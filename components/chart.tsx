@@ -37,7 +37,7 @@ export const Chart = ({ data = [] }: Props) => {
   };
 
   return (
-    <Card className="border-none drop-shadow-sm">
+    <Card className="border-none drop-shadow-md">
       <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center justify-between">
         <CardTitle className="text-xl line-clamp-1">Transactions</CardTitle>
         <Select defaultValue={chartType} onValueChange={onTypeChange}>
@@ -86,7 +86,7 @@ export const Chart = ({ data = [] }: Props) => {
 
 export const ChartLoading = () => {
   return (
-    <Card className="border-none drop-shadow-sm">
+    <Card className="border-none drop-shadow-md">
       <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center justify-between">
         <Skeleton className="h-8 w-48" />
         <Skeleton className="h-8 lg:w-[120px] w-full" />

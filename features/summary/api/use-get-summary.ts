@@ -16,7 +16,6 @@ export const useGetSummary = () => {
 
   // Use the useQuery hook from react-query to fetch the summary data
   const query = useQuery({
-    // TODO: check if params are needed in the key
     // Set the query key to include the summary and the parameters
     // This helps in caching and refetching the data when the parameters change
     queryKey: ["summary", { from, to, accountId }],

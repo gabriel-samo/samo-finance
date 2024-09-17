@@ -1,7 +1,7 @@
 import Logo from "@/public/logo.svg";
 import Link from "next/link";
 
-const HeaderLogo = () => {
+export const HeaderLogo = () => {
   return (
     <Link href="/">
       <div className="items-center hidden lg:flex">
@@ -11,5 +11,3 @@ const HeaderLogo = () => {
     </Link>
   );
 };
-
-export default HeaderLogo;

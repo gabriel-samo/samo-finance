@@ -39,7 +39,7 @@ export const useEditCategory = (id?: string) => {
       // Invalidate the categories query to refresh the list of categories
       queryClient.invalidateQueries({ queryKey: ["categories"] });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      // TODO: Invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     // Define the onError callback to handle errors during category update
     onError: (error) => {

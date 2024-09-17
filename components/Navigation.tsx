@@ -5,7 +5,7 @@ import { useMedia } from "react-use";
 import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import NavButton from "./NavButton";
+import NavButton from "./nav-button";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -33,7 +33,7 @@ const routes = [
   }
 ];
 
-const Navigation = () => {
+export const Navigation = () => {
   // State to manage the open/close state of the mobile navigation sheet
   const [isOpen, setIsOpen] = useState(false);
 
@@ -107,5 +107,3 @@ const Navigation = () => {
     </nav>
   );
 };
-
-export default Navigation;

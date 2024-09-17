@@ -1,10 +1,11 @@
 import { UserButton, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
-
-import HeaderLogo from "./HeaderLogo";
-import Navigation from "./Navigation";
 import { Loader2 } from "lucide-react";
-import WelcomeMsg from "./WelcomeMsg";
-import { BackgroundGradientAnimation } from "./ui/background-gradient-animation";
+
+import { Filters } from "@/components/filters";
+import { Navigation } from "@/components/navigation";
+import { WelcomeMsg } from "@/components/welcome-msg";
+import { HeaderLogo } from "@/components/header-logo";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 const Header = () => {
   return (
@@ -37,6 +38,7 @@ const Header = () => {
             </ClerkLoading>
           </div>
           <WelcomeMsg />
+          <Filters />
         </div>
       </header>
     </BackgroundGradientAnimation>

@@ -12,7 +12,7 @@ import { useBulkCreateTransactions } from "@/features/transactions/api/use-bulk-
 import { useSelectAccount } from "@/features/accounts/hooks/use-select-account";
 
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/DataTable";
+import { DataTable } from "@/components/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { transactions as transactionsSchema } from "@/db/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -128,7 +128,7 @@ const TransactionsPage = () => {
   // Default view: show the list of transactions
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24 z-[100]">
-      <Card className="border-none drop-shadow-sm">
+      <Card className="border-none drop-shadow-md">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">
             Transactions Page

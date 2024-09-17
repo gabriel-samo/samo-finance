@@ -19,7 +19,6 @@ export const useGetTransactions = () => {
   const query = useQuery({
     // Unique key for the query to cache and track its state
     // The key includes the 'from', 'to', and 'accountId' parameters to ensure the cache is specific to these parameters
-    // TODO: check if params are needed in the key
     queryKey: ["transactions", { from, to, accountId }],
     // Function to fetch the data
     queryFn: async () => {

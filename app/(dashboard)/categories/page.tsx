@@ -7,7 +7,7 @@ import { useGetCategories } from "@/features/categories/api/use-get-categories";
 import { useBulkDeleteCategories } from "@/features/categories/api/use-bulk-delete-categories";
 
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/DataTable";
+import { DataTable } from "@/components/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -24,7 +24,7 @@ const CategoriesPage = () => {
   if (categoriesQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24 z-[100]">
-        <Card className="border-none drop-shadow-sm">
+        <Card className="border-none drop-shadow-md">
           <CardHeader>
             <Skeleton className="h-8 w-48" />
           </CardHeader>
@@ -40,7 +40,7 @@ const CategoriesPage = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24 z-[100]">
-      <Card className="border-none drop-shadow-sm">
+      <Card className="border-none drop-shadow-md">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">
             Categories Page

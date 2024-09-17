@@ -35,7 +35,7 @@ export const useBulkDeleteCategories = () => {
       toast.success("Categories deleted");
       // Invalidate the categories query to refresh the data
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      // TODO: Also invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     // Define the onError callback to handle errors during category deletion
     onError: (error) => {

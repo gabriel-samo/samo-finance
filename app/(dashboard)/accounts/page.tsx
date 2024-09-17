@@ -7,7 +7,7 @@ import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
 import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts";
 
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/DataTable";
+import { DataTable } from "@/components/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -24,7 +24,7 @@ const AccountsPage = () => {
   if (accountsQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24 z-[100]">
-        <Card className="border-none drop-shadow-sm">
+        <Card className="border-none drop-shadow-md">
           <CardHeader>
             <Skeleton className="h-8 w-48" />
           </CardHeader>
@@ -40,7 +40,7 @@ const AccountsPage = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24 z-[100]">
-      <Card className="border-none drop-shadow-sm">
+      <Card className="border-none drop-shadow-md">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">Accounts Page</CardTitle>
           <Button size="sm" onClick={newAccount.onOpen}>

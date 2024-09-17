@@ -13,7 +13,7 @@ export const UploadButton = ({ onUpload }: Props) => {
   // Destructure the CSVReader component from the useCSVReader hook
   const { CSVReader } = useCSVReader();
 
-  // TODO: add a paywall
+  // TODO: add paywall
 
   return (
     // Render the CSVReader component and pass the onUpload function to handle the accepted upload
