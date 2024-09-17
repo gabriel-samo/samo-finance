@@ -7,7 +7,7 @@ import { WelcomeMsg } from "@/components/welcome-msg";
 import { HeaderLogo } from "@/components/header-logo";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
-const Header = () => {
+export const Header = () => {
   return (
     <BackgroundGradientAnimation
       gradientBackgroundStart="rgb(5, 150, 105)" // emerald-600
@@ -44,5 +44,3 @@ const Header = () => {
     </BackgroundGradientAnimation>
   );
 };
-
-export default Header;
