@@ -10,6 +10,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 import { SheetProvider } from "@/providers/sheet-provider";
 import { QueryProvider } from "@/providers/query-provider";
+import { DotBackground } from "@/components/dot-background";
 
 // Initialize the Inter font with Latin subset
 const inter = Inter({ subsets: ["latin"] });
@@ -39,15 +40,17 @@ export default function RootLayout({
             overflowX: "clip"
           }}
         >
-          {/* Provide Query context for data fetching */}
-          <QueryProvider>
-            {/* Provide Sheet context for managing sheets */}
-            <SheetProvider />
-            {/* Display toast notifications */}
-            <Toaster />
-            {/* Render child components */}
-            {children}
-          </QueryProvider>
+          <DotBackground>
+            {/* Provide Query context for data fetching */}
+            <QueryProvider>
+              {/* Provide Sheet context for managing sheets */}
+              <SheetProvider />
+              {/* Display toast notifications */}
+              <Toaster />
+              {/* Render child components */}
+              {children}
+            </QueryProvider>
+          </DotBackground>
         </body>
       </html>
     </ClerkProvider>
