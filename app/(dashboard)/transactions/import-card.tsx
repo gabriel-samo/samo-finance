@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { format, parse } from "date-fns";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 import { convertAmountToMiliunits } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/component/ui/card";
 
 import { ImportTable } from "./import-table";
 

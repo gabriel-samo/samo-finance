@@ -7,10 +7,10 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 // Import custom components and providers
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/component/ui/sonner";
 import { SheetProvider } from "@/providers/sheet-provider";
 import { QueryProvider } from "@/providers/query-provider";
-import { DotBackground } from "@/components/dot-background";
+import { DotBackground } from "@/component/dot-background";
 
 // Initialize the Inter font with Latin subset
 const inter = Inter({ subsets: ["latin"] });

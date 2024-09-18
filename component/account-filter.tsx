@@ -12,7 +12,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/components/ui/select";
+} from "@/component/ui/select";
 
 export const AccountFilter = () => {
   const router = useRouter();

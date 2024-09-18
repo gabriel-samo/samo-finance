@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/components/ui/select";
+} from "@/component/ui/select";
 
 // Define the type for the component props
 type Props = {

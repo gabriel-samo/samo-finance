@@ -4,21 +4,21 @@ import { useForm } from "react-hook-form";
 import { Loader2, TrashIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Select } from "@/components/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { DatePicker } from "@/components/date-picker";
+import { Select } from "@/component/select";
+import { Input } from "@/component/ui/input";
+import { Button } from "@/component/ui/button";
+import { Textarea } from "@/component/ui/textarea";
+import { DatePicker } from "@/component/date-picker";
 import { insertTransactionSchema } from "@/db/schema";
 import { convertAmountToMiliunits } from "@/lib/utils";
-import { AmountInput } from "@/components/amount-input";
+import { AmountInput } from "@/component/amount-input";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel
-} from "@/components/ui/form";
+} from "@/component/ui/form";
 
 // Define the form schema using Zod, picking only the 'name' field from the insertTransactionsSchema
 const formSchema = z.object({

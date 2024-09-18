@@ -12,7 +12,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle
-} from "@/components/ui/sheet";
+} from "@/component/ui/sheet";
 
 // Define the form schema using Zod, picking only the 'name' field from the insertAccountSchema
 const formSchema = insertAccountSchema.pick({

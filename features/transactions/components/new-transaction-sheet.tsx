@@ -20,7 +20,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle
-} from "@/components/ui/sheet";
+} from "@/component/ui/sheet";
 
 // Define the form schema using Zod, omitting the 'id' field from the insertTransactionSchema
 const formSchema = insertTransactionSchema.omit({

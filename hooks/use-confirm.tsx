@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle
-} from "@/components/ui/dialog";
+} from "@/component/ui/dialog";
 
 export function useConfirm(
   title: string,

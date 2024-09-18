@@ -11,11 +11,11 @@ import { useBulkCreateTransactions } from "@/features/transactions/api/use-bulk-
 
 import { useSelectAccount } from "@/features/accounts/hooks/use-select-account";
 
-import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/data-table";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/component/ui/button";
+import { DataTable } from "@/component/data-table";
+import { Skeleton } from "@/component/ui/skeleton";
 import { transactions as transactionsSchema } from "@/db/schema";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/component/ui/card";
 
 import { columns } from "./columns";
 import { ImportCard } from "./import-card";

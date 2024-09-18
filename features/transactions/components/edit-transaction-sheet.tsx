@@ -22,7 +22,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle
-} from "@/components/ui/sheet";
+} from "@/component/ui/sheet";
 import { Loader2 } from "lucide-react";
 
 // Define the form schema using Zod, picking only the 'name' field from the insertTransactionSchema

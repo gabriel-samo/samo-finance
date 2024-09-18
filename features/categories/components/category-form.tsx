@@ -4,8 +4,8 @@ import { Loader2, TrashIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/component/ui/input";
+import { Button } from "@/component/ui/button";
 import { insertCategorySchema } from "@/db/schema";
 import {
   Form,
@@ -13,7 +13,7 @@ import {
   FormField,
   FormItem,
   FormLabel
-} from "@/components/ui/form";
+} from "@/component/ui/form";
 
 // Define the form schema using Zod, picking only the 'name' field from the insertCategorySchema
 const formSchema = insertCategorySchema.pick({

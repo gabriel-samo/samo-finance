@@ -6,14 +6,14 @@ import { useDeleteCategory } from "@/features/categories/api/use-delete-category
 
 // Import icons and UI components
 import { Edit, MoreHorizontal, Trash } from "lucide-react"; // Icons for the edit action and more options
-import { Button } from "@/components/ui/button"; // Button component
+import { Button } from "@/component/ui/button"; // Button component
 import { useConfirm } from "@/hooks/use-confirm";
 import {
   DropdownMenu, // Dropdown menu component
   DropdownMenuContent, // Content of the dropdown menu
   DropdownMenuItem, // Individual item in the dropdown menu
   DropdownMenuTrigger // Trigger to open the dropdown menu
-} from "@/components/ui/dropdown-menu";
+} from "@/component/ui/dropdown-menu";
 
 // Define the type for the component props
 type Props = {

@@ -1,8 +1,8 @@
 import { IconType } from "react-icons";
 import { VariantProps, cva } from "class-variance-authority";
 
-import { CountUp } from "@/components/count-up";
-import { Skeleton } from "@/components/ui/skeleton";
+import { CountUp } from "@/component/count-up";
+import { Skeleton } from "@/component/ui/skeleton";
 import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
 import {
   Card,
@@ -10,7 +10,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle
-} from "@/components/ui/card";
+} from "@/component/ui/card";
 
 const boxVariant = cva("shrink-0 rounded-md p-3", {
   variants: {
