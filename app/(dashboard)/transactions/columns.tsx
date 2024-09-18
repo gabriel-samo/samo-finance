@@ -7,9 +7,9 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { client } from "@/lib/hono";
 import { formatCurrency } from "@/lib/utils";
-import { Badge } from "@/component/ui/badge";
-import { Button } from "@/component/ui/button";
-import { Checkbox } from "@/component/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import { Actions } from "./actions";
 import { AccountColumn } from "./account-column";

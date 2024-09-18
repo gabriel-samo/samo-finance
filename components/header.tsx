@@ -1,11 +1,11 @@
 import { UserButton, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 
-import { Filters } from "@/component/filters";
-import { Navigation } from "@/component/navigation";
-import { WelcomeMsg } from "@/component/welcome-msg";
-import { HeaderLogo } from "@/component/header-logo";
-import { BackgroundGradientAnimation } from "@/component/ui/background-gradient-animation";
+import { Filters } from "@/components/filters";
+import { Navigation } from "@/components/navigation";
+import { WelcomeMsg } from "@/components/welcome-msg";
+import { HeaderLogo } from "@/components/header-logo";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 export const Header = () => {
   return (

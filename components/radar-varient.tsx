@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
   Tooltip
 } from "recharts";
-import { CategoryTooltip } from "@/component/category-tooltip";
+import { CategoryTooltip } from "@/components/category-tooltip";
 
 type Props = {
   data: {

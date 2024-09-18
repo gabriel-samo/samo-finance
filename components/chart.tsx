@@ -7,18 +7,18 @@ import {
   Loader2
 } from "lucide-react";
 
-import { Skeleton } from "@/component/ui/skeleton";
-import { BarVariant } from "@/component/bar-variant";
-import { LineVariant } from "@/component/line-variant";
-import { AreaVariant } from "@/component/area-variant";
-import { Card, CardContent, CardHeader, CardTitle } from "@/component/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { BarVariant } from "@/components/bar-variant";
+import { LineVariant } from "@/components/line-variant";
+import { AreaVariant } from "@/components/area-variant";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/component/ui/select";
+} from "@/components/ui/select";
 
 type Props = {
   data?: {

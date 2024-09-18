@@ -16,7 +16,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle
-} from "@/component/ui/sheet";
+} from "@/components/ui/sheet";
 import { Loader2 } from "lucide-react";
 
 // Define the form schema using Zod, picking only the 'name' field from the insertAccountSchema

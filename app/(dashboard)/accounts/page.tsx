@@ -6,10 +6,10 @@ import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
 import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
 import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts";
 
-import { Button } from "@/component/ui/button";
-import { DataTable } from "@/component/data-table";
-import { Skeleton } from "@/component/ui/skeleton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/component/ui/card";
+import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/data-table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { columns } from "./columns";
 

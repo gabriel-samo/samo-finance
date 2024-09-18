@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger
-} from "@/component/ui/tooltip";
+} from "@/components/ui/tooltip";
 
 // Define the props for the AmountInput component
 type Props = {

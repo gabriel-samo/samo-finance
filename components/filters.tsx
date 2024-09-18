@@ -1,5 +1,5 @@
-import { AccountFilter } from "@/component/account-filter";
-import { DateFilter } from "@/component/date-filter";
+import { AccountFilter } from "@/components/account-filter";
+import { DateFilter } from "@/components/date-filter";
 
 export const Filters = () => {
   return (

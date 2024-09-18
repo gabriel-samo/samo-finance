@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "@/component/ui/table";
+} from "@/components/ui/table";
 import { TableHeadSelect } from "./table-head-select";
 
 type Props = {

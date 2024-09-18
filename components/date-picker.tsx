@@ -4,13 +4,13 @@ import { CalendarIcon } from "lucide-react";
 import { SelectSingleEventHandler } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/component/ui/button";
-import { Calendar } from "@/component/ui/calendar";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger
-} from "@/component/ui/popover";
+} from "@/components/ui/popover";
 
 // Define the props for the DatePicker component
 type Props = {

@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
   CartesianGrid
 } from "recharts";
-import { CustomTooltip } from "@/component/custom-tooltip";
+import { CustomTooltip } from "@/components/custom-tooltip";
 
 type Props = {
   data: {

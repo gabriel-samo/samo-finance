@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import NavButton from "./nav-button";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/component/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 // Define the routes for the navigation menu
 const routes = [
@@ -26,11 +26,11 @@ const routes = [
   {
     href: "/categories",
     label: "Categories"
-  },
-  {
-    href: "/settings",
-    label: "Settings"
   }
+  // {
+  //   href: "/settings",
+  //   label: "Settings"
+  // }
 ];
 
 export const Navigation = () => {

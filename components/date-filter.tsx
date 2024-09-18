@@ -13,20 +13,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/component/ui/select";
+} from "@/components/ui/select";
 
 import { useGetSummary } from "@/features/summary/api/use-get-summary";
 
 import { cn, formatDateRange } from "@/lib/utils";
-import { Button } from "@/component/ui/button";
-import { Calendar } from "@/component/ui/calendar";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
   PopoverClose
-} from "@/component/ui/popover";
+} from "@/components/ui/popover";
 
 export const DateFilter = () => {
   const router = useRouter();

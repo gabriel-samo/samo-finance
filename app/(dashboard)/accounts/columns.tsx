@@ -7,8 +7,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Actions } from "./actions";
 import { client } from "@/lib/hono";
-import { Button } from "@/component/ui/button";
-import { Checkbox } from "@/component/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 // Define the type for the response data from the API
 export type ResponseType = InferResponseType<

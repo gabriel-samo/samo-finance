@@ -22,10 +22,10 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "@/component/ui/table";
+} from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { useConfirm } from "@/hooks/use-confirm";
-import { Input } from "@/component/ui/input";
+import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

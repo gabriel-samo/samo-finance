@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
 import { useCreateAccount } from "@/features/accounts/api/use-create-account";
 
-import { Select } from "@/component/select";
-import { Button } from "@/component/ui/button";
+import { Select } from "@/components/select";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle
-} from "@/component/ui/dialog";
+} from "@/components/ui/dialog";
 
 // Custom hook to handle account selection with a confirmation dialog
 export function useSelectAccount(): [

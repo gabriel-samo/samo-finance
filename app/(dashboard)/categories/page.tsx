@@ -6,10 +6,10 @@ import { useNewCategory } from "@/features/categories/hooks/use-new-category";
 import { useGetCategories } from "@/features/categories/api/use-get-categories";
 import { useBulkDeleteCategories } from "@/features/categories/api/use-bulk-delete-categories";
 
-import { Button } from "@/component/ui/button";
-import { DataTable } from "@/component/data-table";
-import { Skeleton } from "@/component/ui/skeleton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/component/ui/card";
+import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/data-table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { columns } from "./columns";
 

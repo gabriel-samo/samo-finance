@@ -1,7 +1,7 @@
 import { Upload } from "lucide-react"; // Import the Upload icon from lucide-react
 import { useCSVReader } from "react-papaparse"; // Import the useCSVReader hook from react-papaparse
 
-import { Button } from "@/component/ui/button"; // Import the Button component from the UI library
+import { Button } from "@/components/ui/button"; // Import the Button component from the UI library
 
 // Define the type for the component props
 type Props = {
