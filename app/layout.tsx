@@ -17,8 +17,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 // Define metadata for the application
 export const metadata: Metadata = {
-  title: "Finance App",
-  description: "Finance App for managing your finances made by Gabriel Samoylov"
+  title: "Samo Finance",
+  description:
+    "Personal finance dashboard for tracking income, expenses, and accounts.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 // Specify the runtime environment for the application
@@ -26,7 +30,7 @@ export const runtime = "edge";
 
 // Define the root layout component for the application
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -37,7 +41,7 @@ export default function RootLayout({
         <body
           className={inter.className}
           style={{
-            overflowX: "clip"
+            overflowX: "clip",
           }}
         >
           <DotBackground>
